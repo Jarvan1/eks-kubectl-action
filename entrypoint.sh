@@ -24,6 +24,7 @@ fi
 if [ -n "${INPUT_MANIFESTS_FILE:-}" ] && [ -n "${INPUT_IMAGE:-}" ]; then
   # export AWS_DEFAULT_REGION="${INPUT_AWS_REGION}"
   sed -i "" "s#image:.*#image: ${INPUT_IMAGE:-}#g" ${INPUT_MANIFESTS_FILE:-}
+  kubectl apply -f ${INPUT_MANIFESTS_FILE:-}
 fi
 
 echo "aws version"

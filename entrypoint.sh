@@ -23,7 +23,7 @@ fi
 
 if [ -n "${INPUT_MANIFESTS_FILE:-}" ] && [ -n "${INPUT_IMAGE:-}" ]; then
 #   # export AWS_DEFAULT_REGION="${INPUT_AWS_REGION}"
-  sed -i "s/image:.*/image: ${INPUT_IMAGE}/g" ${INPUT_MANIFESTS_FILE}
+  sed -i "s#image:.*#image: ${INPUT_IMAGE}#g" ${INPUT_MANIFESTS_FILE}
 fi
 
 echo "aws version"
@@ -38,7 +38,7 @@ else
   aws eks update-kubeconfig --name "${INPUT_CLUSTER_NAME}"
 fi
 cat ${INPUT_MANIFESTS_FILE}
-sed -i "s/image:.*/image: ${INPUT_IMAGE}/g" ${INPUT_MANIFESTS_FILE}
+sed -i "s#image:.*#image: ${INPUT_IMAGE}#g" ${INPUT_MANIFESTS_FILE}
 debug "Starting kubectl collecting output"
 output=$( kubectl "$@" )
 debug "${output}"

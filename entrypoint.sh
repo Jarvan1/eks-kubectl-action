@@ -38,6 +38,8 @@ else
   aws eks update-kubeconfig --name "${INPUT_CLUSTER_NAME}"
 fi
 cat ${INPUT_MANIFESTS_FILE}
+echo "----"
+kubectl --kubeconfig=/github/home/.kube/config apply -f ${INPUT_MANIFESTS_FILE}
 # sed -i "s#image:.*#image: ${INPUT_IMAGE}#g" ${INPUT_MANIFESTS_FILE}
 debug "Starting kubectl collecting output"
 output=$( kubectl "$@" )
